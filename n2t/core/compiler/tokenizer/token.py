@@ -86,4 +86,5 @@ class XMLTokenFactory(ITokenFactory):
         for regex in cls.regexes:
             if re.fullmatch(regex, jack_str):
                 return cls.object_map.get(regex).create(jack_str)  # type: ignore
+        print(jack_str)
         raise Exception

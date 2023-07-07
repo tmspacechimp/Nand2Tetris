@@ -3,12 +3,12 @@ from dataclasses import dataclass
 from typing import ClassVar, Dict, Type
 
 from n2t.core.vm_translator.constants import (
+    ADDRESS_TYPE_TABLE,
     CONSTANT_PUSH_FORMAT,
     NON_STATIC_PUSH_FORMAT,
     POINTER_PUSH_FORMAT,
     STATIC_PUSH_FORMAT,
     TEMP_PUSH_FORMAT,
-    ADDRESS_TYPE_TABLE,
 )
 from n2t.core.vm_translator.stack_instruction import (
     PushOperation,

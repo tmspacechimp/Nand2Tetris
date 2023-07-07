@@ -74,3 +74,7 @@ IDENTIFIER_TYPE_NAME = "identifier"
 INT_CONSTANT_TYPE_NAME = "integerConstant"
 
 STR_CONSTANT_TYPE_NAME = "stringConstant"
+
+MULTIWORD_STR_CONSTANT_BEGINNING = r'^"[^"]*$'
+
+MULTIWORD_STR_CONSTANT_ENDING = r'^[^"]*"$'

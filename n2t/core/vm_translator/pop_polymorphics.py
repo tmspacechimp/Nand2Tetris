@@ -2,12 +2,12 @@ from abc import ABC
 from typing import ClassVar, Dict, Type
 
 from n2t.core.vm_translator.constants import (
+    ADDRESS_TYPE_TABLE,
     NON_STATIC_POP_FORMAT,
     STATIC_POP_FORMAT,
     TEMP_POP_FORMAT,
     THAT_POINTER_POP_FORMAT,
     THIS_POINTER_POP_FORMAT,
-    ADDRESS_TYPE_TABLE,
 )
 from n2t.core.vm_translator.stack_instruction import (
     PopOperation,

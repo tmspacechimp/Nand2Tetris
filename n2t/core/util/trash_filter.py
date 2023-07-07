@@ -4,20 +4,33 @@ from typing import Protocol, Tuple
 
 
 class TrashFilter(Protocol):
-    def passes(self, instruction_str: str) -> bool:
+    @classmethod
+    def passes(cls, instruction_str: str) -> bool:
         pass
 
 
 class CommentFilter(TrashFilter):
-    def passes(self, instruction_str: str) -> bool:
+    @classmethod
+    def passes(cls, instruction_str: str) -> bool:
         return not (
-            instruction_str.startswith("//") or match(r"^\s*//", instruction_str)
+            instruction_str.startswith("//")
+            or match(r"^\s*//", instruction_str)
+            or match(r"^\s*/\*\*", instruction_str)
+            or match(r"^\s*\*", instruction_str)
+            or match(r"^\s*\*/", instruction_str)
         )
 
 
 class EmptyLineFilter(TrashFilter):
-    def passes(self, instruction_str: str) -> bool:
+    @classmethod
+    def passes(cls, instruction_str: str) -> bool:
         return not (instruction_str == "")
+
+
+class SpacesLineFilter(TrashFilter):
+    @classmethod
+    def passes(cls, instruction_str: str) -> bool:
+        return not match(r"^\s*$", instruction_str)
 
 
 @dataclass
@@ -26,8 +39,9 @@ class CompositeTrashFilter(TrashFilter):
         default=(EmptyLineFilter(), CommentFilter())
     )
 
-    def passes(self, instruction_str: str) -> bool:
-        for f in self.filters:
+    @classmethod
+    def passes(cls, instruction_str: str) -> bool:
+        for f in cls.filters:
             if not f.passes(instruction_str):
                 return False
         return True
